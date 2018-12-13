@@ -11,14 +11,14 @@
 					<h4 class="mat-subheading-2 center-align">Market Adı</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Yapımcı Adı" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="text" matInput placeholder="Market Adı" />
 					</mat-form-field>
 				</div>
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
 					<h4  class="mat-subheading-2 center-align">Oyun Seç</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-							<mat-select placeholder="Oyunn">
+							<mat-select placeholder="Oyun">
 								<mat-option *ngFor="let food of foods" [value]="food.value">
 													{{ food.viewValue }}
 								</mat-option>
@@ -39,14 +39,22 @@
 					<h4 class="mat-subheading-2 center-align">İtem Adı</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="İtem Adı" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="text" matInput placeholder="İtem Adı" />
+					</mat-form-field>
+				</div>
+
+				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+					<h4 class="mat-subheading-2 center-align">Açıklama</h4>
+					<mat-divider></mat-divider>
+					<mat-form-field>
+						<input type="text" matInput placeholder="Açıklama" />
 					</mat-form-field>
 				</div>
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 					<h4 class="mat-subheading-2 center-align">İtem Resim Url</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="İtem Resim Url" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="text" matInput placeholder="İtem Resim Url" />
 					</mat-form-field>
 				</div>
 			</div>
@@ -56,14 +64,27 @@
 					<h4 class="mat-subheading-2 center-align">Özellik</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Özellik" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
-					</mat-form-field>
+						<mat-select placeholder="Özellik" [formControl]="toppings" multiple>
+						  <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+						</mat-select>
+					  </mat-form-field>
 				</div>
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
 					<h4  class="mat-subheading-2 center-align">İtem Türü</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
 							<mat-select placeholder="İtem Türü">
+								<mat-option *ngFor="let food of foods" [value]="food.value">
+													{{ food.viewValue }}
+								</mat-option>
+							</mat-select>
+					</mat-form-field>
+				</div>
+				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
+					<h4  class="mat-subheading-2 center-align">Oyun</h4>
+					<mat-divider></mat-divider>
+					<mat-form-field>
+							<mat-select placeholder="Oyun">
 								<mat-option *ngFor="let food of foods" [value]="food.value">
 													{{ food.viewValue }}
 								</mat-option>
@@ -85,9 +106,14 @@
 							</mat-select>
 					</mat-form-field>
 				</div>
+
+				
 			</div>
+			<button mat-raised-button color="primary">Ekle</button>
+
+			
+	
 		
-				<button mat-raised-button color="primary">Ekle</button>
 
 	</div>
 </div>

@@ -11,14 +11,14 @@
 					<h4 class="mat-subheading-2 center-align">Yapımcı Adı</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Yapımcı Adı" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="text" matInput placeholder="Yapımcı Adı" />
 					</mat-form-field>
 				</div>
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 					<h4 class="mat-subheading-2 center-align">Slogan</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Slogan" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="text" matInput placeholder="Slogan" />
 					</mat-form-field>
 				</div>
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
@@ -42,14 +42,14 @@
 					<h4 class="mat-subheading-2 center-align">Oyun Adı</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Oyun Adı" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="text" matInput placeholder="Oyun Adı" />
 					</mat-form-field>
 				</div>
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 					<h4 class="mat-subheading-2 center-align">Açıklama</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Açıklama" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="text" matInput placeholder="Açıklama" />
 					</mat-form-field>
 				</div>
 			</div>
@@ -59,14 +59,14 @@
 					<h4 class="mat-subheading-2 center-align">Fiyat</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Fiyat" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="number" matInput placeholder="Fiyat" />
 					</mat-form-field>
 				</div>
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 					<h4 class="mat-subheading-2 center-align">Boyut</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Boyut" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="number" matInput placeholder="Fiyat" />
 					</mat-form-field>
 				</div>
 				
@@ -77,14 +77,14 @@
 								<h4 class="mat-subheading-2 center-align">Resim URL</h4>
 								<mat-divider></mat-divider>
 								<mat-form-field>
-									<textarea matInput placeholder="url" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+									<input type="text" matInput placeholder="Resim URL" />
 								</mat-form-field>
 							</div>
 							<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 									<h4 class="mat-subheading-2 center-align">Video URL</h4>
 									<mat-divider></mat-divider>
 									<mat-form-field>
-										<textarea matInput placeholder="url" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+										<input type="text" matInput placeholder="Video URL" />
 									</mat-form-field>
 								</div>
 			</div>
@@ -102,7 +102,16 @@
 										<h4  class="mat-subheading-2 center-align">Kategori Seç</h4>
 										<mat-divider></mat-divider>
 										<mat-form-field>
-												<mat-select placeholder="Kategori">
+											<mat-select placeholder="Kategori" [formControl]="toppings" multiple>
+											  <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+											</mat-select>
+										  </mat-form-field>
+									</div>
+									<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
+										<h4  class="mat-subheading-2 center-align">Yapımcı</h4>
+										<mat-divider></mat-divider>
+										<mat-form-field>
+												<mat-select placeholder="Yapımcı">
 													<mat-option *ngFor="let food of foods" [value]="food.value">
 																		{{ food.viewValue }}
 													</mat-option>
