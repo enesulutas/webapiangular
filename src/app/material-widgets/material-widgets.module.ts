@@ -95,7 +95,6 @@ export function highlightJsFactory(): any {
   declarations: [
     ButtonsComponent,
     ListComponent,
-
     StepperComponent,
     ExpansionPanelComponent,
     SpinnerComponent,
