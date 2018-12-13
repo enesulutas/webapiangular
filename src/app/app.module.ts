@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { LazyLoadModule } from './lazy-load/lazy-load.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
+import {OzellikService} from './shared/ozellik.service';
+
 
 
 
@@ -19,7 +21,7 @@ import { CoreModule } from './core/core.module';
     CoreModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [OzellikService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
