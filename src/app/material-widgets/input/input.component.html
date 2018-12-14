@@ -180,14 +180,18 @@
             <h4 class="mat-subheading-2 center-align">Resim URL</h4>
             <mat-divider></mat-divider>
             <mat-form-field>
-              <input type="text" matInput placeholder="Resim URL" />
+              <input type="text"  name="resimUrl"
+              #resimUrl="ngModel"
+              [(ngModel)]="resim.url"  matInput placeholder="Resim URL" />
             </mat-form-field>
           </div>
           <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
             <h4 class="mat-subheading-2 center-align">Video URL</h4>
             <mat-divider></mat-divider>
             <mat-form-field>
-              <input type="text" matInput placeholder="Video URL" />
+              <input type="text" name="videoUrl"
+              #videoUrl="ngModel"
+              [(ngModel)]="video.url"  matInput placeholder="Video URL" />
             </mat-form-field>
           </div>
         </div>
@@ -228,8 +232,8 @@
                 multiple>
                 <mat-option
                   *ngFor="let kategori of kategoriler"
-                  [value]="kategori"
-                  >{{ kategori }}</mat-option
+                  [value]="kategori.id"
+                  >{{ kategori.kategoriAdi }}</mat-option
                 >
               </mat-select>
             </mat-form-field>
@@ -238,7 +242,7 @@
             <h4 class="mat-subheading-2 center-align">Yapımcı</h4>
             <mat-divider></mat-divider>
             <mat-form-field>
-              <mat-select placeholder="Yapımcı" name="oyunYapimci" #oyunYapimci="ngModel" [(ngModel)]="yapimcilarim">
+              <mat-select placeholder="Yapımcı" name="oyunYapimci" #oyunYapimci="ngModel" [(ngModel)]="oyun.yapimciId">
                 <mat-option *ngFor="let yapimci of yapimcilar" [value]="yapimci.id">
                   {{ yapimci.adi }}
                 </mat-option>
