@@ -16,7 +16,6 @@ export class YapimciService {
   }
 
   addYapimci(yapimci: Yapimci) {
-    yapimci.id
     let headers = new HttpHeaders();
     headers.append("Content-Type", "application/json");
     this.Http.post(Utility.Host+"yapimci", yapimci, {

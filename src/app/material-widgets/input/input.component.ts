@@ -8,6 +8,12 @@ import {
 import {Yapimci} from '../../classes/Yapimci';
 import {Oyun} from '../../classes/Oyun';
 import {YapimciService} from '../../shared/yapimci.service';
+import { Kategori } from '../../classes/Kategori';
+import { KategoriService } from '../../shared/kategori.service';
+import { OyunRequest } from '../../classes/request/OyunRequest';
+import { Resim } from '../../classes/Resim';
+import { Video } from '../../classes/Video';
+import { OyunService } from '../../shared/oyun.service';
 
 @Component({
   selector: 'cdk-input',
@@ -15,20 +21,23 @@ import {YapimciService} from '../../shared/yapimci.service';
   styleUrls: ['./input.component.scss']
 })
 export class InputComponent implements OnInit {
-  public yapimci: Yapimci = new Yapimci(null, '', new Date(), '');
+  public yapimci: Yapimci = new Yapimci(0, '', new Date(), '');
+
   public oyun: Oyun = new Oyun();
+  public resim:Resim=new Resim();
+  public video:Video=new Video();
 
-  public kategorilerim: string = '';
-  public kategoriler: string[] = ['enes', 'huseyin', 'muhammed'];
+  public kategorilerim: number[] = [];
 
-  public yapimcilarim: string = '';
+  public kategoriler: Kategori[] = [];
   public yapimcilar: Yapimci[] = [];
 
-  constructor(private yapimciService: YapimciService) {
+  constructor(private oyunService: OyunService,private yapimciService: YapimciService,private kategoriService:KategoriService) {
   }
 
   ngOnInit() {
     this.getAllYapimci();
+    this.getAllKategori();
   }
 
   onYapimciSubmit() {
@@ -36,7 +45,8 @@ export class InputComponent implements OnInit {
   }
 
   onOyunSubmit() {
-    console.log(this.oyun);
+    let oyunRequest=new OyunRequest(this.oyun,this.resim,this.video,this.kategorilerim);
+    this.oyunService.addOyun(oyunRequest);
   }
 
   getAllYapimci() {
@@ -48,4 +58,15 @@ export class InputComponent implements OnInit {
       null
     );
   }
+  getAllKategori() {
+    this.kategoriService.getAll().subscribe(
+      data => {
+        this.kategoriler = data as Kategori[];
+      },
+      err => console.log('Kategorileri çekme başarısız.'),
+      null
+    );
+  }
+
+
 }
