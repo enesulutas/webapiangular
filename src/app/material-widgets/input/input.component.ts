@@ -14,6 +14,7 @@ import { OyunRequest } from '../../classes/request/OyunRequest';
 import { Resim } from '../../classes/Resim';
 import { Video } from '../../classes/Video';
 import { OyunService } from '../../shared/oyun.service';
+import { Item } from '../../classes/Item';
 
 @Component({
   selector: 'cdk-input',

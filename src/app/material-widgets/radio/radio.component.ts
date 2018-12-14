@@ -6,6 +6,10 @@ import { Market } from '../../classes/Market';
 import { OzellikService } from '../../shared/ozellik.service';
 import { Ozellik } from '../../classes/Ozellik';
 import { Item } from '../../classes/Item';
+import { OyunService } from '../../shared/oyun.service';
+import { Oyun } from '../../classes/Oyun';
+import { ItemRequest} from '../../classes/request/ItemRequest';
+import { ItemResim } from '../../classes/ItemResim';
 
 
 @Component({
@@ -19,6 +23,11 @@ export class RadioComponent implements OnInit {
   public market:Market=new Market(0,'',0);
   public marketlerim:string='';
   public marketler:Market[]=[];
+  public marketId:number=0;
+
+
+  public itemResim:ItemResim=new ItemResim();
+
 
   public item:Item=new Item(0,'','',false,false,false,0,0);
   public itemlerim:string='';
@@ -27,18 +36,27 @@ export class RadioComponent implements OnInit {
   public ozelliklerim:string=''
   public ozellikler:Ozellik[]=[];
 
-  constructor(private marketService:MarketService,private itemService:ItemService,private ozellikService:OzellikService){}
+  public oyunId:number=0;
+  public oyunlar:Oyun[]=[];
+
+  constructor(private marketService:MarketService,private itemService:ItemService,private ozellikService:OzellikService,private oyunService:OyunService){}
 
 
   ngOnInit() {
     this.getAllMarket();
+    this.getAllOyun();
+    this.getAllOzellik();
+    
   }
   onMarketSubmit(){
-    this.marketService.addMarket(this.market);
+    console.log(this.market)
+   this.marketService.addMarket(this.market);
   }
   onItemSubmit(){
-    this.itemService.addItem(this.item);
-    console.log(this.item)
+    
+    let itemRequest = new ItemRequest(this.item,this.itemResim);
+    console.log(itemRequest);
+    this.itemService.addItem(itemRequest);
   }
 
   getAllMarket(){
@@ -58,6 +76,15 @@ export class RadioComponent implements OnInit {
       err=>console.log(err)
     );
   }
+  getAllOyun(){
+    this.oyunService.getAll().subscribe(
+      data=>{
+        this.oyunlar=data as Oyun[];
+      },
+      err=>console.log(err)
+    );
+  }
+  
 
   
 }

@@ -11,16 +11,15 @@
 						<h4 class="mat-subheading-2 center-align">Market Adı</h4>
 						<mat-divider></mat-divider>
 						<mat-form-field>
-							<input type="text" name="marketAdi" #marketAdi="ngModel" [(ngModel)]="market.Adi" matInput placeholder="Market Adı" />
+							<input type="text" name="marketAdi" #marketAdi="ngModel" [(ngModel)]="market.adi" matInput placeholder="Market Adı" />
 						</mat-form-field>
 					</div>
 					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 						<h4 class="mat-subheading-2 center-align">Oyun Seç</h4>
 						<mat-divider></mat-divider>
 						<mat-form-field>
-							<mat-select placeholder="Oyun" name="oyunMarket" #oyunMarket[(ngModel)] [(ngModel)]="marketlerim">
-								<mat-option *ngFor="let market of marketler" [value]="market.id">
-									{{market.adi}}
+							<mat-select placeholder="Oyun" name="itemOyun" #itemOyun="ngModel" [(ngModel)]="market.oyunid">
+								<mat-option *ngFor="let oyun of oyunlar" [value]="oyun.id">{{oyun.adi}}
 								</mat-option>
 							</mat-select>
 						</mat-form-field>
@@ -33,25 +32,14 @@
 
 
 			<h1>İtem Ekle</h1>
-			<form
-			name="itemForm"
-			#itemFrm="ngForm"
-			(ngSubmit)="itemFrm.form.valid && onMarketSubmit()"
-			novalidate>
+			<form name="itemForm" #itemFrm="ngForm" (ngSubmit)="itemFrm.form.valid && onItemSubmit()" novalidate>
 				<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
 
 					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 						<h4 class="mat-subheading-2 center-align">İtem Adı</h4>
 						<mat-divider></mat-divider>
 						<mat-form-field>
-							<input 
-							type="text"
-							 matInput 
-							 placeholder="İtem Adı"
-							 name="itemAdi"
-							 #yapimciAdi="ngModel"
-							 [(ngModel)]="item.adi"
-							 required />
+							<input type="text" matInput placeholder="İtem Adı" name="itemAdi" #yapimciAdi="ngModel" [(ngModel)]="item.adi" required />
 						</mat-form-field>
 					</div>
 
@@ -59,28 +47,16 @@
 						<h4 class="mat-subheading-2 center-align">Açıklama</h4>
 						<mat-divider></mat-divider>
 						<mat-form-field>
-							<input
-							 name="aciklama"
-							 #aciklama="ngModel"
-							 [(ngModel)]="item.aciklama"
-							 required
-							 type="text"
-							 matInput
-							 placeholder="Açıklama" />
+							<input name="aciklama" #aciklama="ngModel" [(ngModel)]="item.aciklama" required type="text" matInput placeholder="Açıklama"
+							/>
 						</mat-form-field>
 					</div>
 					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 						<h4 class="mat-subheading-2 center-align">İtem Resim Url</h4>
 						<mat-divider></mat-divider>
 						<mat-form-field>
-							<input 
-							type="text" 
-							matInput 
-							placeholder="İtem Resim Url"
-							required
-							name="resimUrl"
-							#resimUrl="ngModel"
-							[(ngModel)]="item.resimUrl" />
+							<input type="text" matInput placeholder="İtem Resim Url" required name="resimUrl" #resimUrl="ngModel" [(ngModel)]="itemResim.url"
+							/>
 						</mat-form-field>
 					</div>
 				</div>
@@ -90,12 +66,7 @@
 						<h4 class="mat-subheading-2 center-align">Özellik</h4>
 						<mat-divider></mat-divider>
 						<mat-form-field>
-							<mat-select 
-							placeholder="Özellik" 
-							name="itemOzellik"
-							#itemOzellik="ngModel"
-							[(ngModel)]="ozelliklerim" 
-							>
+							<mat-select placeholder="Özellik" name="itemOzellik" #itemOzellik="ngModel" [(ngModel)]="item.ozellikId">
 								<mat-option *ngFor="let ozellik of ozellikler" [value]="ozellik.id">{{ozellik.adi}}</mat-option>
 							</mat-select>
 						</mat-form-field>
@@ -103,26 +74,28 @@
 					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 						<h4 class="mat-subheading-2 center-align">İtem Türü</h4>
 						<mat-divider></mat-divider>
-						<mat-form-field>
-							<mat-select placeholder="İtem Türü">
-								<mat-option>
-										<option value="silah">Silah</option>
-										<option value="kiyafet">Kıyafet</option>
-									    <option value="takviye">Takviye</option>
+						<mat-list>
+							<mat-list-item>
+								<section>
+									<mat-checkbox name="isKiyafet" #isKiyafet="ngModel" [(ngModel)]="item.isKiyafet">Kıyafet</mat-checkbox>
+								</section>
 
-								</mat-option>
-							</mat-select>
-						</mat-form-field>
+								<section>
+									<mat-checkbox name="isSilah" #isSilah="ngModel" [(ngModel)]="item.isSilah">Silah</mat-checkbox>
+								</section>
+								<section>
+									<mat-checkbox name="isBoost" #isBoost="ngModel" [(ngModel)]="item.isBoost">Takviye</mat-checkbox>
+
+								</section>
+							</mat-list-item>
+						</mat-list>
 					</div>
 					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 						<h4 class="mat-subheading-2 center-align">Oyun</h4>
 						<mat-divider></mat-divider>
 						<mat-form-field>
-							<mat-select placeholder="Oyun">
-								<mat-option>
-										<option value="silah">Silah</option>
-										<option value="kiyafet">Kıyafet</option>
-									    <option value="takviye">Takviye</option>
+							<mat-select placeholder="Oyun" name="itemOyun" #itemOyun="ngModel" [(ngModel)]="item.oyunId">
+								<mat-option *ngFor="let oyun of oyunlar" [value]="oyun.id">{{oyun.adi}}
 								</mat-option>
 							</mat-select>
 						</mat-form-field>
@@ -135,11 +108,7 @@
 						<h4 class="mat-subheading-2 center-align">Market</h4>
 						<mat-divider></mat-divider>
 						<mat-form-field>
-							<mat-select 
-							placeholder="Market"
-							name="itemMarket"
-							#itemMarket="ngModel"
-							[(ngModel)]="marketlerim">
+							<mat-select placeholder="Market" name="itemMarket" #itemMarket="ngModel" [(ngModel)]="item.marketId">
 								<mat-option *ngFor="let market of marketler" [value]="market.id">
 									{{ market.adi }}
 								</mat-option>
@@ -151,7 +120,7 @@
 				</div>
 				<button mat-raised-button color="primary">Ekle</button>
 
-				</form>
+			</form>
 
 
 

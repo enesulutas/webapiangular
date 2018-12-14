@@ -19,7 +19,7 @@ getAll():Observable<Market[]>{
 addMarket(market:Market){
   let headers=new HttpHeaders();
   headers.append("Content-Type", "application/json");
-  this.Http.post(Utility.Host+"yapimci", market, {
+  this.Http.post(Utility.Host+"market", market, {
     headers: headers
   }).subscribe(data => {});}
 
