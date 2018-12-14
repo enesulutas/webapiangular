@@ -40,13 +40,15 @@ export class InputComponent implements OnInit {
     this.getAllKategori();
   }
 
-  onYapimciSubmit() {
+  onYapimciSubmit(form:NgForm) {
     this.yapimciService.addYapimci(this.yapimci);
+    form.resetForm();
   }
 
-  onOyunSubmit() {
+  onOyunSubmit(form:NgForm) {
     let oyunRequest=new OyunRequest(this.oyun,this.resim,this.video,this.kategorilerim);
     this.oyunService.addOyun(oyunRequest);
+    form.resetForm();
   }
 
   getAllYapimci() {
@@ -67,6 +69,5 @@ export class InputComponent implements OnInit {
       null
     );
   }
-
 
 }

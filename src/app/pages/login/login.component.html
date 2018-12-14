@@ -1,34 +1,65 @@
-<div fxLayout="column" fxFlexFill fxLayoutAlign="center center" style="background-image:url('../../../assets/login11.jpg');
+<div
+  fxLayout="column"
+  fxFlexFill
+  fxLayoutAlign="center center"
+  style="background-image:url('../../../assets/login11.jpg');
 height: 100%;
 background-repeat: no-repeat;
 background-position: center;
-background-size: cover; ">
-    <div fxLayout="column" >
-   
-        <div class=" mat-elevation-z4">
-            <mat-card>
-                <mat-card-title>Üye Girişi
-                </mat-card-title>
-                <mat-card-content>
-                    <form fxLayout="column" fxLayoutAlign="start stretch" [formGroup]="userForm" (ngSubmit)="login()">
-                        <mat-form-field class="full-width">
-                          <input type="email" id="email" class="input" placeholder="Mail"
-                                 formControlName="email" required matInput>
-                        </mat-form-field>
-                        <div *ngIf="formErrors.email" class="help is-danger">
-                            {{ formErrors.email }}
-                        </div>
-                        <mat-form-field class="full-width">
-                            <input type="password" id="password" class="input" placeholder="Şifre"
-                            formControlName="password" required matInput>
-                        </mat-form-field>
-                        <div *ngIf="formErrors.password" class="help is-danger">
-                            {{ formErrors.password }}
-                        </div>
-                        <button mat-raised-button color="primary" type="submit"  (click)="login()">Giriş</button>
-                    </form>
-                </mat-card-content>
-            </mat-card>
-        </div>
+background-size: cover; "
+>
+  <div fxLayout="column">
+    <div class=" mat-elevation-z4">
+      <mat-card>
+        <mat-card-title>Üye Girişi </mat-card-title>
+        <mat-card-content>
+          <form
+            fxLayout="column"
+            fxLayoutAlign="start stretch"
+            name="loginForm"
+            #loginFrm="ngForm"
+            (ngSubmit)="loginFrm.form.valid && onLoginSubmit(loginFrm)"
+            novalidate
+          >
+            <mat-form-field class="full-width">
+              <input
+                type="text"
+                id="kullaniciAdi"
+                class="input"
+                placeholder="Kullanıcı Adı"
+                name="kullaniciAdi"
+                #kullaniciAdi="ngModel"
+                [(ngModel)]="kullanici.kullaniciAdi"
+                required
+                matInput
+              />
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+              <input
+                type="password"
+                id="sifre"
+                class="input"
+                placeholder="Şifre"
+                name="sifre"
+                #sifre="ngModel"
+                [(ngModel)]="kullanici.sifre"
+                required
+                matInput
+              />
+            </mat-form-field>
+
+            <button
+              [disabled]="!loginFrm.form.valid"
+              mat-raised-button
+              color="primary"
+              type="submit"
+            >
+              Giriş
+            </button>
+          </form>
+        </mat-card-content>
+      </mat-card>
     </div>
+  </div>
 </div>

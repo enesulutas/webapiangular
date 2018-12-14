@@ -18,6 +18,7 @@ import { SliderComponent } from './slider/slider.component';
 import { SlidetoggleComponent } from './slidetoggle/slidetoggle.component';
 import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { MenuComponent } from './menu/menu.component';
+import {LoginGuard} from './login.guard';
 
 
 const materialWidgetRoutes: Routes = [
@@ -32,7 +33,7 @@ const materialWidgetRoutes: Routes = [
     { path: 'checkbox', component:  CheckboxComponent , data: { animation: 'checkbox' }},
     
     { path: 'select', component:  SelectComponent ,data: { animation: 'select' } },
-    { path: 'input', component:  InputComponent , data: { animation: 'input' }},
+    { path: 'input', component:  InputComponent , data: { animation: 'input' },canActivate: [LoginGuard]},
     { path: 'radio', component:  RadioComponent , data: { animation: 'radio' }},
     { path: 'datepicker', component:  DatepickerComponent , data: { animation: 'datepicker' }},
     { path: 'slider', component:  SliderComponent , data: { animation: 'slider' }},
