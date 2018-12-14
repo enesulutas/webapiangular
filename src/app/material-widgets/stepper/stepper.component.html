@@ -4,7 +4,7 @@
 			<h1 class="mat-headline center-align">Özellik Ekleme</h1>
 		</mat-toolbar>
 		<div class="input-container">
-			<form name="ozellikForm" #ozellikFrm="ngForm" (ngSubmit)="ozellikFrm.form.valid && onSubmit()" novalidate >
+			<form name="ozellikForm" #ozellikFrm="ngForm" (ngSubmit)="ozellikFrm.form.valid && onOzellikSubmit()" novalidate >
 			<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
 
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
@@ -37,9 +37,7 @@
 					<h2 >Özellikler</h2>
 						<mat-divider></mat-divider>
 						<mat-list>
-							<mat-list-item> Pepper </mat-list-item>
-							<mat-list-item> Salt </mat-list-item>
-							<mat-list-item> Paprika </mat-list-item>
+							<mat-list-item *ngFor="let ozellik of ozellikler">{{ozellik.adi}}</mat-list-item>
 						</mat-list>
 				</div>
 				</div>

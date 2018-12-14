@@ -4,117 +4,156 @@
 			<h1 class="mat-headline center-align">Market Ekleme</h1>
 		</mat-toolbar>
 		<div class="input-container">
+			<form name="marketForm" #marketFrm="ngForm" (ngSubmit)="marketFrm.form.valid && onMarketSubmit()" novalidate>
+				<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
 
-			<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
-
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
-					<h4 class="mat-subheading-2 center-align">Market Adı</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
-						<input type="text" matInput placeholder="Market Adı" />
-					</mat-form-field>
-				</div>
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
-					<h4  class="mat-subheading-2 center-align">Oyun Seç</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
-							<mat-select placeholder="Oyun">
-								<mat-option *ngFor="let food of foods" [value]="food.value">
-													{{ food.viewValue }}
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">Market Adı</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
+							<input type="text" name="marketAdi" #marketAdi="ngModel" [(ngModel)]="market.Adi" matInput placeholder="Market Adı" />
+						</mat-form-field>
+					</div>
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">Oyun Seç</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
+							<mat-select placeholder="Oyun" name="oyunMarket" #oyunMarket[(ngModel)] [(ngModel)]="marketlerim">
+								<mat-option *ngFor="let market of marketler" [value]="market.id">
+									{{market.adi}}
 								</mat-option>
 							</mat-select>
-					</mat-form-field>
-				</div>
-			
+						</mat-form-field>
+					</div>
 
-			</div>
-			<button mat-raised-button color="primary">Ekle</button>
+
+				</div>
+				<button mat-raised-button color="primary">Ekle</button>
+			</form>
 
 
 			<h1>İtem Ekle</h1>
+			<form
+			name="itemForm"
+			#itemFrm="ngForm"
+			(ngSubmit)="itemFrm.form.valid && onMarketSubmit()"
+			novalidate>
+				<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
 
-			<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">İtem Adı</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
+							<input 
+							type="text"
+							 matInput 
+							 placeholder="İtem Adı"
+							 name="itemAdi"
+							 #yapimciAdi="ngModel"
+							 [(ngModel)]="item.adi"
+							 required />
+						</mat-form-field>
+					</div>
 
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
-					<h4 class="mat-subheading-2 center-align">İtem Adı</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
-						<input type="text" matInput placeholder="İtem Adı" />
-					</mat-form-field>
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">Açıklama</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
+							<input
+							 name="aciklama"
+							 #aciklama="ngModel"
+							 [(ngModel)]="item.aciklama"
+							 required
+							 type="text"
+							 matInput
+							 placeholder="Açıklama" />
+						</mat-form-field>
+					</div>
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">İtem Resim Url</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
+							<input 
+							type="text" 
+							matInput 
+							placeholder="İtem Resim Url"
+							required
+							name="resimUrl"
+							#resimUrl="ngModel"
+							[(ngModel)]="item.resimUrl" />
+						</mat-form-field>
+					</div>
 				</div>
+				<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
 
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
-					<h4 class="mat-subheading-2 center-align">Açıklama</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
-						<input type="text" matInput placeholder="Açıklama" />
-					</mat-form-field>
-				</div>
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
-					<h4 class="mat-subheading-2 center-align">İtem Resim Url</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
-						<input type="text" matInput placeholder="İtem Resim Url" />
-					</mat-form-field>
-				</div>
-			</div>
-			<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
-
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
-					<h4 class="mat-subheading-2 center-align">Özellik</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
-						<mat-select placeholder="Özellik" [formControl]="toppings" multiple>
-						  <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
-						</mat-select>
-					  </mat-form-field>
-				</div>
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
-					<h4  class="mat-subheading-2 center-align">İtem Türü</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">Özellik</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
+							<mat-select 
+							placeholder="Özellik" 
+							name="itemOzellik"
+							#itemOzellik="ngModel"
+							[(ngModel)]="ozelliklerim" 
+							>
+								<mat-option *ngFor="let ozellik of ozellikler" [value]="ozellik.id">{{ozellik.adi}}</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">İtem Türü</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
 							<mat-select placeholder="İtem Türü">
-								<mat-option *ngFor="let food of foods" [value]="food.value">
-													{{ food.viewValue }}
+								<mat-option>
+										<option value="silah">Silah</option>
+										<option value="kiyafet">Kıyafet</option>
+									    <option value="takviye">Takviye</option>
+
 								</mat-option>
 							</mat-select>
-					</mat-form-field>
-				</div>
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
-					<h4  class="mat-subheading-2 center-align">Oyun</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
+						</mat-form-field>
+					</div>
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">Oyun</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
 							<mat-select placeholder="Oyun">
-								<mat-option *ngFor="let food of foods" [value]="food.value">
-													{{ food.viewValue }}
+								<mat-option>
+										<option value="silah">Silah</option>
+										<option value="kiyafet">Kıyafet</option>
+									    <option value="takviye">Takviye</option>
 								</mat-option>
 							</mat-select>
-					</mat-form-field>
+						</mat-form-field>
+					</div>
+
 				</div>
-				
-			</div>
-			<div fxLayout="row"fxLayout.lt-sm="column" fxLayoutGap="20px">
-				
-				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
-					<h4  class="mat-subheading-2 center-align">Market</h4>
-					<mat-divider></mat-divider>
-					<mat-form-field>
-							<mat-select placeholder="Market">
-								<mat-option *ngFor="let food of foods" [value]="food.value">
-													{{ food.viewValue }}
+				<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+
+					<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
+						<h4 class="mat-subheading-2 center-align">Market</h4>
+						<mat-divider></mat-divider>
+						<mat-form-field>
+							<mat-select 
+							placeholder="Market"
+							name="itemMarket"
+							#itemMarket="ngModel"
+							[(ngModel)]="marketlerim">
+								<mat-option *ngFor="let market of marketler" [value]="market.id">
+									{{ market.adi }}
 								</mat-option>
 							</mat-select>
-					</mat-form-field>
+						</mat-form-field>
+					</div>
+
+
 				</div>
+				<button mat-raised-button color="primary">Ekle</button>
 
-				
-			</div>
-			<button mat-raised-button color="primary">Ekle</button>
+				</form>
 
-			
-	
-		
 
+
+		</div>
 	</div>
-</div>
-
