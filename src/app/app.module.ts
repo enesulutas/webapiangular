@@ -12,6 +12,7 @@ import { KategoriService } from './shared/kategori.service';
 import { OzellikService } from './shared/ozellik.service';
 import { LoginGuard} from './material-widgets/login.guard';
 import { StorageServiceModule } from 'angular-webstorage-service';
+import { SatistaService } from './shared/satista.service';
 
 @NgModule({
   declarations: [
@@ -27,10 +28,7 @@ import { StorageServiceModule } from 'angular-webstorage-service';
     StorageServiceModule
   ],
 
- 
-  providers: [YapimciService,OyunService,KategoriService,OzellikService],
-
-  providers: [YapimciService,OyunService,KategoriService,OzellikService,LoginGuard],
+  providers: [YapimciService,OyunService,KategoriService,OzellikService,LoginGuard,SatistaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
