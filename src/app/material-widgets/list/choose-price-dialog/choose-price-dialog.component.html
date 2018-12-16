@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>Hayırlı İşler</h1>
+<div mat-dialog-content>
+  <p>Eşyanı kaça satmak istersin?</p>
+  <mat-form-field>
+    <input matInput [(ngModel)]="data.fiyat">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Hayır</button>
+  <button mat-button [mat-dialog-close]="data.fiyat" cdkFocusInitial>Tamam</button>
+</div>
