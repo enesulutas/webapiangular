@@ -23,8 +23,8 @@ import {LoginGuard} from './login.guard';
 
 const materialWidgetRoutes: Routes = [
   	{ path: 'buttons', component:  ButtonsComponent , data: { animation: 'buttons' }},
-    { path: 'list', component:  ListComponent , data: { animation: 'list' }},
-    { path: 'stepper', component: StepperComponent ,data: { animation: 'stepper' } },
+    { path: 'list', component:  ListComponent , data: { animation: 'list' },canActivate: [LoginGuard]},
+    { path: 'stepper', component: StepperComponent ,data: { animation: 'stepper' } ,canActivate: [LoginGuard]},
     { path: 'expansion', component: ExpansionPanelComponent , data: { animation: 'expansion' }},
     { path: 'spinner', component: SpinnerComponent ,data: { animation: 'spinner' } },
     { path: 'cards', component: CardsComponent ,data: { animation: 'cards' } },
@@ -34,7 +34,7 @@ const materialWidgetRoutes: Routes = [
     
     { path: 'select', component:  SelectComponent ,data: { animation: 'select' } },
     { path: 'input', component:  InputComponent , data: { animation: 'input' },canActivate: [LoginGuard]},
-    { path: 'radio', component:  RadioComponent , data: { animation: 'radio' }},
+    { path: 'radio', component:  RadioComponent , data: { animation: 'radio' },canActivate: [LoginGuard]},
     { path: 'datepicker', component:  DatepickerComponent , data: { animation: 'datepicker' }},
     { path: 'slider', component:  SliderComponent , data: { animation: 'slider' }},
     { path: 'slide-toggle', component:  SlidetoggleComponent ,data: { animation: 'slide-toggle' } },

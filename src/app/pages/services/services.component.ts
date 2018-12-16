@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { SatistaService } from '../../shared/satista.service';
 import { Satista } from '../../classes/Satista';
+import { SatinAlinan } from '../../classes/SatinAlinan';
+import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
+import { SatinAlinanlarService } from '../../shared/satinAlinanlar.service';
 
 @Component({
   selector: 'app-services',
@@ -13,7 +16,7 @@ export class ServicesComponent implements OnInit {
 
 
 
-  constructor(private satistaService:SatistaService) { }
+  constructor(private satistaService:SatistaService,private satinAlinanlarService:SatinAlinanlarService,@Inject(SESSION_STORAGE) private storage:StorageService) { }
 
   ngOnInit() {
     this.getAllSatista();
@@ -30,7 +33,12 @@ export class ServicesComponent implements OnInit {
     )
   }
 
+  satinAl(itemId:number){
+      this.satinAlinanlarService.satinAl(new SatinAlinan(0, this.getCurrentUserId(),itemId));
+  }
 
-
+  getCurrentUserId(){
+   return this.storage.get("kullaniciId");
+  }
 
 }

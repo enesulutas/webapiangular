@@ -4,9 +4,9 @@ export class Satista {
         satisFiyati:number,
         itemId:number,
         adi:string,
-         aciklama:string,
-         url:string,
-         kullaniciAdi:string
+        aciklama:string,
+        url:string,
+        kullaniciAdi:string
     ){
         this.id=id;
         this.satisFiyati=satisFiyati;
@@ -25,3 +25,5 @@ export class Satista {
     public kullaniciAdi:string
 
 }
+
+

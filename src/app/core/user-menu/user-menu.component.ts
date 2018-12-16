@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, HostListener, ElementRef,Injectable,Inject } from '@angular/core';
 import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 import { Router } from '@angular/router';
+import { KullaniciService } from '../../shared/kullanici.service';
 @Component({
   selector: 'cdk-user-menu',
   templateUrl: './user-menu.component.html',
@@ -10,7 +11,7 @@ export class UserMenuComponent implements OnInit {
 	isOpen: boolean = false;
 
   	//currentUser = null;
-  	Hari;
+    public kullaniciAdi:string=null;
   	
 
   	@Input() currentUser = null;
@@ -27,10 +28,11 @@ export class UserMenuComponent implements OnInit {
   	}
   	
     
-  	constructor(@Inject(SESSION_STORAGE) private storage:StorageService,private elementRef: ElementRef,private router: Router) { }
+  	constructor(@Inject(SESSION_STORAGE) private storage:StorageService,private kullaniciService:KullaniciService,private elementRef: ElementRef,private router: Router) { }
 
 
   	ngOnInit() {
+		  this.getUserNameById(this.getCurrentUserId());
 	  }
 	  
 	  logOut() {
@@ -38,4 +40,17 @@ export class UserMenuComponent implements OnInit {
 		this.router.navigate(['login']);
 	  }
 
+	  getUserNameById(userId:string){
+		  this.kullaniciService.getUserNameById(userId).subscribe(
+			data => {
+				this.kullaniciAdi=data;
+			},
+			err => console.log("Kullanıcı adı çekme başarısız."),
+			null
+		  );
+	  }
+
+	  getCurrentUserId(){
+		  return this.storage.get("kullaniciId");
+	  }
 }

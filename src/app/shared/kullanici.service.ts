@@ -18,5 +18,8 @@ export class KullaniciService {
     });
   }
 
+  getUserNameById(userId:string):Observable<string>{
+    return this.Http.get<string>(Utility.Host+"kullanici/"+userId);
+  }
   
 }

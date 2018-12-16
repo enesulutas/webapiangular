@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule,
          MatSelectModule,
          MatProgressBarModule,
          MatMenuModule,
+         MatDialogModule
 
  } from '@angular/material';
 
@@ -52,6 +53,7 @@ import { ProgressbarComponent } from './progressbar/progressbar.component';
 import { InputComponent } from './input/input.component';
 import { RadioComponent } from './radio/radio.component';
 import { SelectComponent } from './select/select.component';
+import { ChoosePriceDialogComponent } from './list/choose-price-dialog/choose-price-dialog.component';
 
 
 
@@ -68,6 +70,7 @@ export function highlightJsFactory(): any {
     MatButtonModule,
     MatCardModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatProgressSpinnerModule,
     MatIconModule,
     MatTabsModule,
@@ -104,7 +107,7 @@ export function highlightJsFactory(): any {
     IconsComponent,
     AutocompleteComponent,
     CheckboxComponent,
-
+    ChoosePriceDialogComponent,
     SelectComponent,
 
     DatepickerComponent,
@@ -119,7 +122,7 @@ export function highlightJsFactory(): any {
 
 
     ],
-
+  entryComponents:[ChoosePriceDialogComponent],
   exports: [
     ]
       
