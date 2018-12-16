@@ -7,11 +7,11 @@ import { LazyLoadModule } from './lazy-load/lazy-load.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './core/core.module';
 import { YapimciService} from './shared/yapimci.service';
-
 import { OyunService } from './shared/oyun.service';
 import { KategoriService } from './shared/kategori.service';
 import { OzellikService } from './shared/ozellik.service';
-
+import { LoginGuard} from './material-widgets/login.guard';
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 @NgModule({
   declarations: [
@@ -23,10 +23,14 @@ import { OzellikService } from './shared/ozellik.service';
     LazyLoadModule,
     CoreModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    StorageServiceModule
   ],
+
  
   providers: [YapimciService,OyunService,KategoriService,OzellikService],
+
+  providers: [YapimciService,OyunService,KategoriService,OzellikService,LoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

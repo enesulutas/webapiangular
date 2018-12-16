@@ -12,7 +12,7 @@
       <form
         name="yapimciForm"
         #yapimciFrm="ngForm"
-        (ngSubmit)="yapimciFrm.form.valid && onYapimciSubmit()"
+        (ngSubmit)="yapimciFrm.form.valid && onYapimciSubmit(yapimciFrm)"
         novalidate
       >
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
@@ -30,11 +30,6 @@
                 required
               />
             </mat-form-field>
-            <mat-error>
-              <span *ngIf="!yapimciAdi.valid && yapimciAdi.touched"
-                >Lütfen yapımcı adını giriniz.</span
-              >
-            </mat-error>
           </div>
           <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
             <h4 class="mat-subheading-2 center-align">Slogan</h4>
@@ -50,11 +45,6 @@
                 required
               />
             </mat-form-field>
-            <mat-error>
-              <span *ngIf="!yapimciSlogan.valid && yapimciSlogan.touched"
-                >Lütfen yapımcının sloganını giriniz.</span
-              >
-            </mat-error>
           </div>
           <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
             <h4 class="mat-subheading-2 center-align">Kuruluş Tarihi</h4>
@@ -75,16 +65,8 @@
               ></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <mat-error>
-              <span
-                *ngIf="
-                  !yapimciKurulusTarihi.valid && yapimciKurulusTarihi.touched
-                "
-                >Lütfen kuruluş tarihini giriniz.</span
-              >
-            </mat-error>
           </div>
-          <button mat-raised-button color="primary">Ekle</button>
+          <button [disabled]="!yapimciFrm.form.valid" mat-raised-button color="primary">Ekle</button>
         </div>
       </form>
       <h1>Oyun Ekle</h1>
@@ -92,7 +74,7 @@
       <form
         name="oyunForm"
         #oyunFrm="ngForm"
-        (ngSubmit)="oyunFrm.form.valid && onOyunSubmit()"
+        (ngSubmit)="oyunFrm.form.valid && onOyunSubmit(oyunFrm)"
         novalidate
       >
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
@@ -107,13 +89,9 @@
                 [(ngModel)]="oyun.adi"
                 matInput
                 placeholder="Oyun Adı"
+                required
               />
             </mat-form-field>
-            <mat-error>
-              <span *ngIf="!oyunAdi.valid && oyunAdi.touched"
-                >Lütfen oyun adını giriniz.</span
-              >
-            </mat-error>
           </div>
           <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
             <h4 class="mat-subheading-2 center-align">Açıklama</h4>
@@ -126,13 +104,9 @@
                 [(ngModel)]="oyun.aciklama"
                 matInput
                 placeholder="Açıklama"
+                required
               />
             </mat-form-field>
-            <mat-error>
-              <span *ngIf="!oyunAciklama.valid && oyunAciklama.touched"
-                >Lütfen oyun açıklamasını giriniz.</span
-              >
-            </mat-error>
           </div>
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
@@ -147,13 +121,9 @@
                 [(ngModel)]="oyun.fiyat"
                 matInput
                 placeholder="Fiyat"
+                required
               />
             </mat-form-field>
-            <mat-error>
-              <span *ngIf="!oyunFiyat.valid && oyunFiyat.touched"
-                >Lütfen oyun fiyatını giriniz.</span
-              >
-            </mat-error>
           </div>
           <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
             <h4 class="mat-subheading-2 center-align">Boyut</h4>
@@ -166,13 +136,9 @@
                 [(ngModel)]="oyun.boyut"
                 matInput
                 placeholder="Boyut"
+                required
               />
             </mat-form-field>
-            <mat-error>
-              <span *ngIf="!oyunBoyut.valid && oyunBoyut.touched"
-                >Lütfen oyun boyutunu giriniz.</span
-              >
-            </mat-error>
           </div>
         </div>
         <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
@@ -207,18 +173,14 @@
                 matInput
                 [matDatepicker]="picker2"
                 placeholder="Tarih Seçin"
+                required
               />
               <mat-datepicker-toggle
                 matSuffix
                 [for]="picker2"
               ></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-            <mat-error>
-              <span *ngIf="!oyunCikisTarihi.valid && oyunCikisTarihi.touched"
-                >Lütfen oyun çıkış tarihini giriniz.</span
-              >
-            </mat-error>
+            </mat-form-field> 
           </div>
           <div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
             <h4 class="mat-subheading-2 center-align">Kategori Seç</h4>
@@ -242,7 +204,7 @@
             <h4 class="mat-subheading-2 center-align">Yapımcı</h4>
             <mat-divider></mat-divider>
             <mat-form-field>
-              <mat-select placeholder="Yapımcı" name="oyunYapimci" #oyunYapimci="ngModel" [(ngModel)]="oyun.yapimciId">
+              <mat-select placeholder="Yapımcı" name="oyunYapimci" #oyunYapimci="ngModel" [(ngModel)]="oyun.yapimciId"  required>
                 <mat-option *ngFor="let yapimci of yapimcilar" [value]="yapimci.id">
                   {{ yapimci.adi }}
                 </mat-option>
@@ -250,8 +212,7 @@
             </mat-form-field>
           </div>
         </div>
-
-        <button mat-raised-button color="primary">Ekle</button>
+        <button [disabled]="!oyunFrm.form.valid" mat-raised-button color="primary">Ekle</button>
       </form>
     </div>
   </div>

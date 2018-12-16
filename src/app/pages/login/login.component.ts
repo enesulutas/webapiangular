@@ -1,81 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-// import { AuthService } from '../../core/auth.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit,Injectable,Inject } from "@angular/core";
+import { Router } from "@angular/router";
+import { NgForm } from "@angular/forms";
+import { Kullanici } from "../../classes/Kullanici";
+import { KullaniciService } from "../../shared/kullanici.service";
+import { SESSION_STORAGE, StorageService } from 'angular-webstorage-service';
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: "app-login",
+  templateUrl: "./login.component.html",
+  styleUrls: ["./login.component.scss"]
 })
 export class LoginComponent implements OnInit {
+  public kullanici: Kullanici = new Kullanici();
 
-  userForm: FormGroup;
-  formErrors = {
-    'email': '',
-    'password': ''
-  };
-  validationMessages = {
-    'email': {
-      'required': 'Please enter your email',
-      'email': 'please enter your vaild email'
-    },
-    'password': {
-      'required': 'please enter your password',
-      'pattern': 'The password must contain numbers and letters',
-      'minlength': 'Please enter more than 4 characters',
-      'maxlength': 'Please enter less than 25 characters',
-    }
-  };
+  constructor(@Inject(SESSION_STORAGE) private storage:StorageService,
+    private router: Router,
+    private kullaniciService: KullaniciService
+  ) {}
 
-  constructor(private router: Router,
-              private fb: FormBuilder) {
+  ngOnInit() {}
+
+  onLoginSubmit(loginFrm: NgForm) {
+    this.kullaniciService.login(this.kullanici).subscribe(
+      data => {
+        this.saveToLocalStorage("kullaniciId", data);
+        this.router.navigate(['/']);
+      },
+      err => console.log("Kategorileri çekme başarısız."),
+      null
+    );
   }
 
-  ngOnInit() {
-    this.buildForm();
+  saveToLocalStorage(key, value) {
+    this.storage.set(key, value);
+  }
+  getValueFromLocalStorage(key) {
+    return this.storage.get(key);
   }
 
-  buildForm() {
-    this.userForm = this.fb.group({
-      'email': ['', [
-        Validators.required,
-        Validators.email
-      ]
-      ],
-      'password': ['', [
-        Validators.pattern('^(?=.*[0-9])(?=.*[a-zA-Z])([a-zA-Z0-9]+)$'),
-        Validators.minLength(6),
-        Validators.maxLength(25)
-      ]
-      ],
-    });
-
-    this.userForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged();
-  }
-
-  onValueChanged(data?: any) {
-    // if (!this.userForm) {
-    //   return;
-    // }
-    // const form = this.userForm;
-    // for (const field in this.formErrors) {
-    //   if (Object.prototype.hasOwnProperty.call(this.formErrors, field)) {
-    //     this.formErrors[field] = '';
-    //     const control = form.get(field);
-    //     if (control && control.dirty && !control.valid) {
-    //       const messages = this.validationMessages[field];
-    //       for (const key in control.errors) {
-    //         if (Object.prototype.hasOwnProperty.call(control.errors, key)) {
-    //           this.formErrors[field] += messages[key] + ' ';
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
-  }
-  login() {
-    this.router.navigate(['/']);
-  }
 }
-

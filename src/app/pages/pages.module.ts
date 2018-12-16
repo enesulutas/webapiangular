@@ -18,6 +18,7 @@ import { AboutComponent } from './about/about.component';
 import { ServicesComponent } from './services/services.component';
 import { CoreModule } from '../core/core.module';
 
+
 @NgModule({
     imports: [
         MatCardModule,
@@ -40,8 +41,7 @@ import { CoreModule } from '../core/core.module';
     ],
     exports: [
     ],
-    providers: [
-    ]
+    providers: []
 })
 export class PagesModule {
 }
