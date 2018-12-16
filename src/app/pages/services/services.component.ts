@@ -16,7 +16,7 @@ export class ServicesComponent implements OnInit {
   constructor(private satistaService:SatistaService) { }
 
   ngOnInit() {
-this.getAllSatista();
+    this.getAllSatista();
   }
 
   getAllSatista(){

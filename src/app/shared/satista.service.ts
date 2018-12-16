@@ -18,5 +18,4 @@ constructor(private Http:HttpClient) {
 getAll():Observable<Satista[]>{
   return this.Http.get<Satista[]>(Utility.Host+"satista");
 }
-
 }
