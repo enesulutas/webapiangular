@@ -7,7 +7,9 @@
 
     <mat-list-item *ngIf = "menu.link!=false" (click)="menu.open = !menu.open" [routerLink]="[menu.link]">
         <h3 matLine *ngIf="!iconOnly">{{ menu.name }} </h3>
+        
     </mat-list-item>
+    
 
     <cdk-sidemenu-item *ngFor="let submenu of menu?.sub" [menu]="submenu" [iconOnly]="iconOnly" [secondaryMenu]="true"> </cdk-sidemenu-item>
 

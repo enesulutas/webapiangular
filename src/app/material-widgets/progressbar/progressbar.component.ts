@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {PROGRESSBAR_HELPERS } from './helpers.data';
+import { Ozellik } from '../../classes/Ozellik';
+import { Kategori } from '../../classes/Kategori';
+import { KategoriService } from '../../shared/kategori.service';
 
 @Component({
   selector: 'cdk-progressbar',
@@ -8,24 +11,29 @@ import {PROGRESSBAR_HELPERS } from './helpers.data';
 })
 export class ProgressbarComponent implements OnInit {
 
-  public colors;
-  public modes;
-  public values;
-  public bufferValues;
+	public kategori: Kategori = new Kategori();
 
-  public color;
-  public mode;
-  public value;
-  public bufferValue;
+	public kategoriler:Kategori[]=[];
 
 
 
-  progressbarHelpers: any = PROGRESSBAR_HELPERS;
+  constructor(private kategoriService:KategoriService) { }
 
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-  
+ngOnInit() {
+    this.getAllKategori();
 }
+onKategoriSubmit(){
+  this.kategoriService.addKategori(this.kategori);
+}
+getAllKategori(){
+  this.kategoriService.getAll().subscribe(
+    data=>{
+      this.kategoriler=data as Kategori[];
+    },
+    err=>console.log(err)
+
+  );
+}
+}
+
+

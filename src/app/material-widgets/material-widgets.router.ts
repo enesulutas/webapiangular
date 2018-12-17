@@ -40,7 +40,7 @@ const materialWidgetRoutes: Routes = [
     { path: 'slide-toggle', component:  SlidetoggleComponent ,data: { animation: 'slide-toggle' } },
 
 
-    { path: 'progress-bar', component:  ProgressbarComponent , data: { animation: 'progress-bar' }},
+    { path: 'progress-bar', component:  ProgressbarComponent , data: { animation: 'progress-bar' },canActivate: [LoginGuard]},
     { path: 'menu', component:  MenuComponent ,data: { animation: 'menu' } },
 
     { path: '', redirectTo: '/buttons', pathMatch: 'full',}

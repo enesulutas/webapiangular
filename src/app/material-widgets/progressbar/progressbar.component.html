@@ -4,26 +4,37 @@
 			<h1 class="mat-headline center-align">Kategori Ekleme</h1>
 		</mat-toolbar>
 		<div class="input-container">
-
+			<form name="kategoriForm" #kategoriFrm="ngForm" (ngSubmit)="kategoriFrm.form.valid && onKategoriSubmit()" novalidate >
 			<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
 
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50">
 					<h4 class="mat-subheading-2 center-align">Kategori Adı</h4>
 					<mat-divider></mat-divider>
 					<mat-form-field>
-						<textarea matInput placeholder="Kategori Adı" matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5"></textarea>
+						<input type="text" name="kategoriAdi" [(ngModel)]="kategori.kategoriAdi" #kategoriAdi="ngModel" matInput placeholder="Kategori Adı" required/>
 					</mat-form-field>
 				</div>
+			
 				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
-					<h4  class="mat-subheading-2 center-align">Kategori</h4>
+					<h4  class="mat-subheading-2 center-align">Özellik</h4>
 					<mat-divider></mat-divider>
-						<button mat-raised-button color="primary">Ekle</button>
+						<button  mat-raised-button color="primary">Ekle</button>
 
 				</div>
 			
 
 			</div>
+		</form>
+			<div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="20px">
+
+				<div fxFlex.xs="100" fxFlex.lg="50" fxFlex.md="50" fxFlex.sm="50" >
+					<h2 >Kategoriler</h2>
+						<mat-divider></mat-divider>
+						<mat-list>
+							<mat-list-item *ngFor="let kategori of kategoriler">{{kategori.kategoriAdi}}</mat-list-item>
+						</mat-list>
+				</div>
+				</div>
 
 	</div>
 </div>
-

@@ -37,7 +37,11 @@
 					<h2 >Özellikler</h2>
 						<mat-divider></mat-divider>
 						<mat-list>
-							<mat-list-item *ngFor="let ozellik of ozellikler">{{ozellik.adi}}</mat-list-item>
+							<mat-list-item *ngFor="let ozellik of ozellikler">
+							<p><span>								{{ozellik.adi}} :
+								</span><span>{{ozellik.degeri}}</span></p>
+							</mat-list-item>
+					
 						</mat-list>
 				</div>
 				</div>
